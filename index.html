@@ -3,58 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to my portfolio">
+    <meta name="description" content="Portfolio of DeltA3V1">
+    <meta name="keywords" content="developer, portfolio, projects, tech">
     <meta name="author" content="DeltA3V1">
+    <meta property="og:title" content="DeltA3V1 - Portfolio">
+    <meta property="og:description" content="Explore my projects and work">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#2c3e50">
     <title>DeltA3V1 - Portfolio</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <nav>
+    <header role="banner">
+        <nav aria-label="Main navigation">
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section id="home">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
             <h1>Welcome to My Portfolio</h1>
-            <p>Hi, I'm DeltA3V1. This is my personal portfolio website.</p>
+            <p>Hi, I'm DeltA3V1. Full-stack developer passionate about creating elegant solutions.</p>
+            <a href="#projects" class="cta-button">View My Work</a>
         </section>
 
+        <!-- About Section -->
         <section id="about">
             <h2>About Me</h2>
-            <p>Add information about yourself here.</p>
+            <p>Add information about yourself, your background, and what drives your passion for technology.</p>
+            <p>Include your journey into tech and what you're currently working on.</p>
         </section>
 
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul class="skills-list">
+                <li>JavaScript / TypeScript</li>
+                <li>HTML & CSS</li>
+                <li>React / Vue</li>
+                <li>Backend Development</li>
+                <li>Database Design</li>
+            </ul>
+        </section>
+
+        <!-- Projects Section -->
         <section id="projects">
             <h2>Projects</h2>
             <div class="projects-container">
                 <article class="project-card">
                     <h3>Project 1</h3>
-                    <p>Description of your project goes here.</p>
+                    <p>Description of your project. Mention technologies used and the problem it solves.</p>
+                    <a href="#" class="project-link">View Project →</a>
                 </article>
                 <article class="project-card">
                     <h3>Project 2</h3>
-                    <p>Description of your project goes here.</p>
+                    <p>Description of your project. Mention technologies used and the problem it solves.</p>
+                    <a href="#" class="project-link">View Project →</a>
                 </article>
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact">
-            <h2>Contact</h2>
-            <p>Get in touch with me at: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+            <h2>Get In Touch</h2>
+            <address>
+                <p>Email: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+                <p>GitHub: <a href="https://github.com/DeltA3V1">github.com/DeltA3V1</a></p>
+            </address>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 DeltA3V1. All rights reserved.</p>
+    <footer role="contentinfo">
+        <p>&copy; 2026 DeltA3V1.</p>
     </footer>
 
     <script src="script.js"></script>
+    <noscript>
+        <p>This website works best with JavaScript enabled. Please enable it in your browser settings.</p>
+    </noscript>
 </body>
 </html>
