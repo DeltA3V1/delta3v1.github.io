@@ -1,0 +1,29 @@
+:root {
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: black;
+    color: azure;
+}
+
+a:link {
+    color: white;
+}
+
+a:visited {
+    color:grey;
+}
+
+a:hover {
+    color:lightgrey;
+}
+
+a:active {
+    color:khaki;
+}
