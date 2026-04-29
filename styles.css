@@ -1,29 +1,100 @@
-:root {
-    display: flex;
-    justify-content: center;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
+/* OVERALL PAGE LAYOUT */
 body {
     min-height: 100vh;
-    text-rendering: optimizeSpeed;
-    line-height: 1.5;
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: black;
+    background-color: #111;
     color: azure;
+    line-height: 1.6;
+    
+    display: grid;
+    grid-template-rows: auto 1fr auto; 
 }
 
-a:link {
-    color: white;
+h1, h2 {
+    padding-bottom: 0.25em
 }
 
-a:visited {
-    color:grey;
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-a:hover {
-    color:lightgrey;
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #222;
 }
 
-a:active {
-    color:khaki;
+nav button {
+    height: 3em;
+    aspect-ratio: 1 / 1;
+    margin: 1em;
+    padding: 1em;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    padding: 1.5rem;
+}
+
+#about, #skills {
+    background-color: #222;
+    padding: 1.5rem;
+}
+
+#skills ul {
+    display: flex;
+    list-style: none;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+/* PROJECTS GALLERY */
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.project-card {
+    background-color: #222;
+    padding: 1.5rem;
+    border-radius: 8px;
+    /* Cards can also be flex containers! This pushes the link to the bottom of the card */
+    display: flex;
+    flex-direction: column; 
+}
+
+.project-link {
+    margin-top: auto; /* Pushes this link to the bottom of the flex column */
+    display: inline-block;
+    padding-top: 1rem;
+}
+
+/* Link styling */
+a:link, a:visited { color: lightblue; text-decoration: none; }
+a:hover { color: white; text-decoration: underline; }
+
+/* Add some breathing room between sections */
+section {
+    margin-bottom: 4rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #000;
 }
