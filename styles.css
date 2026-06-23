@@ -17,7 +17,7 @@ body {
 }
 
 h1, h2 {
-    padding-bottom: 0.25em
+    padding-bottom: 0.25em;
 }
 
 .container {
@@ -51,14 +51,15 @@ nav ul {
 
 #about, #skills {
     background-color: #222;
-    padding: 1.5rem;
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    
 }
 
 #skills ul {
     display: flex;
     list-style: none;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 /* PROJECTS GALLERY */
