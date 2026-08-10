@@ -1,5 +1,7 @@
 import { type StationId, getStation, getPrevStation, getNextStation } from '../../content/stations'
 import { scrollToStation } from '../../lib/scrollToStation'
+import leftArrow from '../../assets/leftarrow.svg'
+import rightArrow from '../../assets/rightarrow.svg'
 
 type StationButtonProps = {
   stationId: StationId
@@ -17,7 +19,11 @@ function StationButton({ stationId, direction }: StationButtonProps) {
       aria-label={`Go to ${direction === 'prev' ? 'previous' : 'next'} station: ${station?.label}`}
     >
       <span>{station?.label}</span>
-      <span className="leading-none">{direction === 'prev' ? '🡐' : direction === 'next' ? '🡒' : ''}</span>
+      <img
+        src={direction === 'prev' ? leftArrow : rightArrow}
+        alt=""
+        className="mt-1 h-4 w-4"
+      />
     </button>
   )
 }
