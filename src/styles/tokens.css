@@ -1,0 +1,17 @@
+:root {
+    color-scheme: light;
+    --dominant: #f7f4ef;
+    --secondary: #1f2328;
+    --supporting: #5f6672;
+    --surface: #ffffff;
+    --accent: #00aba9;
+}
+
+[data-theme='dark'] {
+    color-scheme: dark;
+    --dominant: #111316;
+    --secondary: #f5f7fa;
+    --supporting: #a7afbb;
+    --surface: #181c21;
+    --accent: #2bc7c4;
+}
