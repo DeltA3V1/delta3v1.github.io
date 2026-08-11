@@ -10,3 +10,10 @@
     --color-accent: var(--accent);
     --font-sans: "DM Sans", sans-serif;
 }
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

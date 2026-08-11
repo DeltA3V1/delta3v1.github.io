@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { type ThemePreference, useTheme } from '../hooks/useTheme'
 import StationHeader from '../components/ui/StationHeader'
 import useActiveStation from '../hooks/useActiveStation'
@@ -12,6 +12,7 @@ import { Portfolio } from '../components/sections/Portfolio'
 import { Blog } from '../components/sections/Blog'
 import { Contact } from '../components/sections/Contact'
 import { BottomSheet } from '../components/shell/NavigationBottomSheet'
+import { MapFab } from '../components/shell/MapFab'
 
 const themeModes: ThemePreference[] = ['system', 'light', 'dark']
 
@@ -23,7 +24,7 @@ function HomePage() {
   return (
     <div className="bg-dominant min-h-screen flex flex-col h-dvh overflow-hidden">
       <StationHeader stationId={activeStation} />
-      <main className="flex-1 overflow-y-auto scroll-smooth">
+      <main className="flex-1 no-scrollbar overflow-y-auto scroll-smooth">
         <Landing />
         <Sitemap />
         <About />
@@ -33,7 +34,8 @@ function HomePage() {
         <Blog />
         <Contact />
       </main>
-      {isBottomSheetOpen && <BottomSheet open={isBottomSheetOpen} />}
+      <BottomSheet open={isBottomSheetOpen} onClose={() => setIsBottomSheetOpen(false)} />
+      <MapFab visible={!isBottomSheetOpen && activeStation !== null && activeStation !== 'landing'} onClick={() => setIsBottomSheetOpen(true)} />
     </div>
   );
 }
