@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import x from "../../assets/x.svg"
 import { type Station, stations } from '../../content/stations'
 
@@ -22,11 +22,11 @@ function NavStation({ station, onClose }: { station: Station, onClose: () => voi
 export function CloseButton({onClose}: {onClose?: () => void}) {
   return (
     <button className="absolute top-2 right-2 w-11 h-11" onClick={onClose}>
-      <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center">
+      <div className="group w-6 h-6 bg-accent hover:bg-accent/80 rounded-full flex items-center justify-center">
         <img
           src={x}
           alt="x"
-          className="w-3 h-3"
+          className="group-hover:w-3.25 group-hover:h-3.25 w-3 h-3"
         />
       </div>
     </button>
@@ -34,6 +34,9 @@ export function CloseButton({onClose}: {onClose?: () => void}) {
 }
 
 export function BottomSheet({ open=false, onClose }: {open: boolean, onClose: () => void}) {
+  const [shouldRender, setShouldRender] = useState(open)
+  const [opacity, setOpacity] = useState(open ? 'opacity-100' : 'opacity-0')
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose()
@@ -46,12 +49,28 @@ export function BottomSheet({ open=false, onClose }: {open: boolean, onClose: ()
     }
   }, [open, onClose])
 
-  if (!open) {
+  useEffect(() => {
+    if (open) {
+      setShouldRender(true)
+      const timer = setTimeout(() => setOpacity('opacity-100'), 20)
+      return () => clearTimeout(timer)
+    } else {
+      setOpacity('opacity-0')
+      const timer = setTimeout(() => setShouldRender(false), 300)
+      return () => clearTimeout(timer)
+    }
+  }, [open])
+
+  if (!shouldRender) {
     return null
   }
 
+
   return (
-    <div className="fixed w-screen h-screen bg-dominant/50 z-50 flex justify-center items-end" onClick={onClose}>
+    <div 
+      className={`fixed w-screen h-screen bg-dominant/50 z-50 flex justify-center items-end transition-opacity duration-300 ${opacity}`}
+      onClick={onClose}
+    >
       <dialog
         id="bottom-sheet" 
         className="fixed bottom-0 w-full flex flex-col bg-dominant rounded-3xl shadow-l border"
