@@ -19,10 +19,10 @@ const themeModes: ThemePreference[] = ['system', 'light', 'dark']
 function HomePage() {
   const { theme, resolvedTheme, setTheme } = useTheme()
   const activeStation = useActiveStation(stationIds)
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(true)
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
 
   return (
-    <div className="bg-dominant min-h-screen flex flex-col h-dvh overflow-hidden">
+    <div className="bg-dominant min-h-screen flex flex-col h-dvh overflow-hidden transition-colors duration-300">
       <StationHeader stationId={activeStation} />
       <main className="flex-1 no-scrollbar overflow-y-auto scroll-smooth">
         <Landing />

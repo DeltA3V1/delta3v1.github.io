@@ -1,6 +1,6 @@
 export function Contact() {
   return (
-    <section id="contact" className="h-screen flex flex-col items-center justify-between bg-dominant">
+    <section id="contact" className="h-screen flex flex-col items-center justify-between bg-dominant transition-colors duration-300">
       <h1 className="text-4xl font-bold">Contact Section Under Construction</h1>
       <p>end</p>
     </section>

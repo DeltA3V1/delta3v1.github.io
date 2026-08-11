@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 import x from "../../assets/x.svg"
-import { type Station, stations } from '../../content/stations'
+import { type Station, type StationId, stations } from '../../content/stations'
+import { scrollToStation } from '../../lib/scrollToStation'
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
+import ThemeToggle from './ThemeToggle'
 
 function NavStation({ station, onClose }: { station: Station, onClose: () => void }) {
   return (
@@ -8,10 +12,7 @@ function NavStation({ station, onClose }: { station: Station, onClose: () => voi
       className="w-50 h-12 flex items-center justify-center"
       onClick={() => {
         onClose()
-        const element = document.getElementById(station.id)
-        if (element) {
-          element.scrollIntoView({ block: 'start' })
-        }
+        scrollToStation(station.id as StationId)
       }}
     >
       <span className="text-lg">{station.label}</span>
@@ -21,78 +22,99 @@ function NavStation({ station, onClose }: { station: Station, onClose: () => voi
 
 export function CloseButton({onClose}: {onClose?: () => void}) {
   return (
-    <button className="absolute top-2 right-2 w-11 h-11" onClick={onClose}>
+    <button className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center" onClick={onClose}>
       <div className="group w-6 h-6 bg-accent hover:bg-accent/80 rounded-full flex items-center justify-center">
         <img
           src={x}
           alt="x"
-          className="group-hover:w-3.25 group-hover:h-3.25 w-3 h-3"
+          draggable={false}
+          className="group-hover:w-3.25 group-hover:h-3.25 w-3 h-3 select-none"
         />
       </div>
     </button>
   )
 }
 
-export function BottomSheet({ open=false, onClose }: {open: boolean, onClose: () => void}) {
-  const [shouldRender, setShouldRender] = useState(open)
-  const [opacity, setOpacity] = useState(open ? 'opacity-100' : 'opacity-0')
+export function BottomSheet({ open = false, onClose }: { open: boolean, onClose: () => void }) {
+  const dragControls = useDragControls()
+  const reduceMotion = usePrefersReducedMotion()
 
   useEffect(() => {
+    if (!open) return
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose()
     }
 
     document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
+    return () => document.removeEventListener('keydown', handleKeyDown)
   }, [open, onClose])
 
-  useEffect(() => {
-    if (open) {
-      setShouldRender(true)
-      const timer = setTimeout(() => setOpacity('opacity-100'), 20)
-      return () => clearTimeout(timer)
-    } else {
-      setOpacity('opacity-0')
-      const timer = setTimeout(() => setShouldRender(false), 300)
-      return () => clearTimeout(timer)
+  const handleDragEnd = (_: unknown, info: { offset: { y: number }; velocity: { y: number } }) => {
+    if (info.offset.y > 100 || info.velocity.y > 500) {
+      onClose()
     }
-  }, [open])
-
-  if (!shouldRender) {
-    return null
   }
 
-
   return (
-    <div 
-      className={`fixed w-screen h-screen bg-dominant/50 z-50 flex justify-center items-end transition-opacity duration-300 ${opacity}`}
-      onClick={onClose}
-    >
-      <dialog
-        id="bottom-sheet" 
-        className="fixed bottom-0 w-full flex flex-col bg-dominant rounded-3xl shadow-l border"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <header className="h-22 flex flex-col justify-center items-center">
-          <div className="w-24 h-1 my-2.5 bg-gray-300 rounded-full"></div>
-          <div className="w-full h-16 flex justify-center items-center">
-            <h2 className="text-4xl">Navigation</h2>
-          </div>
-          <CloseButton onClose={onClose} />
-        </header>
-        <main className="flex flex-col">
-
-          <div className="w-full h-96 flex flex-col justify-center items-center">
-            {stations.map((station) => (
-              <NavStation key={station.id} station={station} onClose={onClose} />
-            ))}
-          </div>
-        </main>
-      </dialog>
-    </div>
+    <AnimatePresence>
+      {open && (
+        <motion.div 
+          className="fixed inset-0 bg-dominant/50 z-50 flex justify-center items-end select-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={
+              reduceMotion 
+                ? { duration: 0 } 
+                : { type: "spring", damping: 25, stiffness: 300 }
+            }
+            drag="y"
+            dragControls={dragControls}
+            dragListener={false}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={{ top: 0, bottom: 0.7 }}
+            dragSnapToOrigin={true}
+            onDragEnd={handleDragEnd}
+            id="bottom-sheet" 
+            className="fixed bottom-0 w-full flex flex-col bg-dominant rounded-3xl shadow-l touch-none"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+          >
+            <header className="h-22 flex flex-col justify-center items-center">
+              <div 
+                className="cursor-grab active:cursor-grabbing w-full flex justify-center items-center py-4 select-none"
+                draggable={false}
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  dragControls.start(e);
+                }}
+              >
+                <div className="w-24 h-1 bg-gray-400 rounded-full pointer-events-none" />
+              </div>
+              <div className="w-full h-16 flex justify-center items-center">
+                <h2 className="text-4xl">Navigation</h2>
+              </div>
+              <ThemeToggle />
+              <CloseButton onClose={onClose} />
+            </header>
+            <main className="flex flex-col">
+              <div className="w-full h-96 flex flex-col justify-center items-center">
+                {stations.map((station) => (
+                  <NavStation key={station.id} station={station} onClose={onClose} />
+                ))}
+              </div>
+            </main>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 

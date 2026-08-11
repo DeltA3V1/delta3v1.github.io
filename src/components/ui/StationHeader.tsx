@@ -2,6 +2,7 @@ import { type StationId, getStation, getPrevStation, getNextStation } from '../.
 import { scrollToStation } from '../../lib/scrollToStation'
 import leftArrow from '../../assets/leftarrow.svg'
 import rightArrow from '../../assets/rightarrow.svg'
+import { useTheme } from '../../hooks/useTheme'
 
 type StationButtonProps = {
   stationId: StationId
@@ -10,11 +11,12 @@ type StationButtonProps = {
 
 function StationButton({ stationId, direction }: StationButtonProps) {
   const station = getStation(stationId)
+  const { resolvedTheme } = useTheme()
 
   return (
     <button
       type="button"
-      className="bg-dominant hover:bg-secondary/20 w-23 h-17 text-lg flex flex-col items-center justify-center border-2 rounded-lg"
+      className="bg-dominant hover:bg-secondary/20 transition-colors duration-500 w-23 h-17 text-lg flex flex-col items-center justify-center border-2 rounded-lg"
       onClick={() => scrollToStation(stationId)}
       aria-label={`Go to ${direction === 'prev' ? 'previous' : 'next'} station: ${station?.label}`}
     >
@@ -22,7 +24,7 @@ function StationButton({ stationId, direction }: StationButtonProps) {
       <img
         src={direction === 'prev' ? leftArrow : rightArrow}
         alt=""
-        className="mt-1 h-4 w-4"
+        className={`${resolvedTheme === 'light' ? 'invert' : ''} mt-1 h-4 w-4`}
       />
     </button>
   )
@@ -40,7 +42,7 @@ function StationHeader({ stationId }: { stationId: StationId | null }) {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-dominant grid grid-cols-4 items-center px-4 h-24">
+    <header className="fixed top-0 left-0 right-0 bg-dominant transition-colors duration-300 grid grid-cols-4 items-center px-4 h-24">
       <div className="flex justify-start">
         {prevStation && (
           <StationButton stationId={prevStation.id} direction="prev" />

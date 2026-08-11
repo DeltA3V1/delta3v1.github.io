@@ -1,8 +1,11 @@
 import HomePage from '../pages/HomePage'
+import { ThemeProvider } from '../hooks/useTheme'
 
 function App() {
   return (
-    <HomePage />
+    <ThemeProvider>
+      <HomePage />
+    </ThemeProvider>
   )
 }
 

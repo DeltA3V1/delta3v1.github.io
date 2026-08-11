@@ -1,9 +1,21 @@
-import { useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 
 export type ThemePreference = 'system' | 'light' | 'dark'
 export type ResolvedTheme = 'light' | 'dark'
 
+type ThemeContextValue = {
+  theme: ThemePreference
+  resolvedTheme: ResolvedTheme
+  setTheme: (theme: ThemePreference) => void
+}
+
 const STORAGE_KEY = 'delta3v1.theme'
+
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
+
+type ThemeProviderProps = {
+  children: ReactNode
+}
 
 function readStoredPreference(): ThemePreference {
   if (typeof window === 'undefined') {
@@ -27,7 +39,7 @@ function getSystemTheme(): ResolvedTheme {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-export function useTheme() {
+export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<ThemePreference>(readStoredPreference)
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(getSystemTheme)
 
@@ -53,9 +65,22 @@ export function useTheme() {
     window.localStorage.setItem(STORAGE_KEY, theme)
   }, [resolvedTheme, theme])
 
-  return {
-    theme,
-    resolvedTheme,
-    setTheme,
-  }
+  const value = useMemo<ThemeContextValue>(
+    () => ({ theme, resolvedTheme, setTheme }),
+    [theme, resolvedTheme],
+  )
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
+
+export function useTheme() {
+  const context = useContext(ThemeContext)
+
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider')
+  }
+
+  return context
+}
+
+export default useTheme
