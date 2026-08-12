@@ -7,3 +7,5 @@ export function scrollToStation(id: StationId): void {
     element.scrollIntoView({ block: 'start' })
   }
 }
+
+export default scrollToStation

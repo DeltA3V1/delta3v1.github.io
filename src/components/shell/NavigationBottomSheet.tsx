@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 import x from "../../assets/x.svg"
 import { type Station, type StationId, stations } from '../../content/stations'
-import { scrollToStation } from '../../lib/scrollToStation'
+import scrollToStation from '../../lib/scrollToStation'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 import ThemeToggle from './ThemeToggle'
 

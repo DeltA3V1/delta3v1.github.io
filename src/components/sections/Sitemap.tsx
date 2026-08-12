@@ -1,8 +1,9 @@
+import TransitMap from "../map/TransitMap";
+
 export function Sitemap() {
   return (
-    <section id="sitemap" className="h-screen flex flex-col items-center justify-between bg-dominant transition-colors duration-300">
-      <h1 className="text-4xl font-bold">Sitemap Section Under Construction</h1>
-      <p>end</p>
+    <section id="sitemap" className="h-238 flex flex-col items-center justify-between bg-dominant transition-colors duration-300">
+      <TransitMap />
     </section>
   )
 }
