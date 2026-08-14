@@ -1,7 +1,10 @@
 import LandingButton from "../ui/LandingButton";
 import scrollToStation from "../../lib/scrollToStation";
+import wideArrow from "../../assets/widearrow.svg";
+import { useTheme } from '../../hooks/useTheme';
 
 export function Landing() {
+  const { resolvedTheme } = useTheme();
   return (
     <section 
       id="landing" 
@@ -23,8 +26,17 @@ export function Landing() {
         </div>
       </div>
 
-      <div className="bg-secondary w-full py-8">
-      </div>
+      <button 
+      className="bg-secondary w-full py-8" 
+      onClick={() => { scrollToStation("sitemap") }}
+      >
+        <div className="flex items-center justify-center">
+          <img 
+            src={ wideArrow } 
+            className={ `${ resolvedTheme === 'light' ? '' : 'invert' }` }
+          />
+        </div>
+      </button>
     </section>
   )
 }

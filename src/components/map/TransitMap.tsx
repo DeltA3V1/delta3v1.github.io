@@ -3,7 +3,7 @@ import StationNode from "./StationNode";
 
 export function TransitMap() {
   return (
-    <section id="transit-map" className="relative h-280 pt-36 pb-16 flex flex-col items-center bg-dominant transition-colors duration-300">
+    <section id="transit-map" className="relative h-280 pt-36 pb-16 flex flex-col items-center transition-colors duration-300">
       <svg
         className="absolute top-0 w-1 h-280 text-secondary"
         viewBox="0 0 4 1120"
