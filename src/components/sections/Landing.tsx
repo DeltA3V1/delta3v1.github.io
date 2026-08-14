@@ -27,7 +27,7 @@ export function Landing() {
       </div>
 
       <button 
-      className="bg-secondary w-full py-8" 
+      className="bg-secondary w-full py-6" 
       onClick={() => { scrollToStation("sitemap") }}
       >
         <div className="flex items-center justify-center">
