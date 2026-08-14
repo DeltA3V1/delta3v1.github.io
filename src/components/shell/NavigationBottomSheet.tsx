@@ -87,7 +87,7 @@ export function BottomSheet({ open = false, onClose }: { open: boolean, onClose:
             onClick={(e) => e.stopPropagation()}
             role="dialog"
           >
-            <header className="h-22 flex flex-col justify-center items-center">
+            <header className="h-16 flex flex-col justify-center items-center">
               <div 
                 className="cursor-grab active:cursor-grabbing w-full flex justify-center items-center py-4 select-none"
                 draggable={false}
@@ -97,9 +97,6 @@ export function BottomSheet({ open = false, onClose }: { open: boolean, onClose:
                 }}
               >
                 <div className="w-24 h-1 bg-gray-400 rounded-full pointer-events-none" />
-              </div>
-              <div className="w-full h-16 flex justify-center items-center">
-                <h2 className="text-4xl">Navigation</h2>
               </div>
               <ThemeToggle />
               <CloseButton onClose={onClose} />
