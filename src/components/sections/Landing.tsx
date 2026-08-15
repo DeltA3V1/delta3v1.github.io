@@ -10,7 +10,7 @@ export function Landing() {
       id="landing" 
       className="min-h-[100dvh] font-inter flex flex-col bg-dominant transition-colors duration-300"
     >
-      <div className="flex-1 flex flex-col items-center justify-center gap-12 px-4">
+      <div className="flex-1 flex flex-col items-center justify-center gap-[5dvh] px-4 mt-[5dvh]">
         <h1 className="text-8xl">[hello]</h1>
         
         <div className="flex flex-col items-center justify-center gap-4">
@@ -20,14 +20,14 @@ export function Landing() {
           </p>
         </div>
         
-        <div className="w-full max-w-xs flex flex-col items-center justify-center gap-4 mt-4">
+        <div className="w-full max-w-xs flex flex-col items-center justify-center gap-4 my-4">
           <LandingButton bg="bg-accent" text="Portfolio" textColor="text-surface" onClick={() => scrollToStation("portfolio")} />
           <LandingButton bg="bg-surface" text="Contact Me" textColor="text-accent" onClick={() => scrollToStation("contact")} />
         </div>
       </div>
 
       <button 
-      className="bg-secondary w-full h-[10vh] py-6" 
+      className="flex flex-col items-center justify-center bg-secondary w-full h-[10vh] py-6" 
       onClick={() => { scrollToStation("sitemap") }}
       >
         <div className="flex flex-col items-center justify-center">
