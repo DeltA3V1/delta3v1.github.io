@@ -48,6 +48,7 @@ export function Toolbox() {
         chips={[
           { text: "React", proficiency: "intermediate" },
           { text: "Tailwind", proficiency: "intermediate" },
+          { text: "Vite", proficiency: "intermediate" },
         ]}
       />
       <ToolboxGroup
@@ -56,6 +57,7 @@ export function Toolbox() {
           { text: "Cybersecurity", proficiency: "beginner" },
           { text: "AI", proficiency: "beginner" },
           { text: "Data Science", proficiency: "beginner" },
+          { text: "Blender", proficiency: "beginner" },
         ]}
       />
     </section>
