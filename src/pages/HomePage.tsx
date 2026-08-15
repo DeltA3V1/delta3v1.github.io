@@ -24,15 +24,17 @@ function HomePage() {
   return (
     <div className="bg-dominant min-h-screen flex flex-col h-dvh overflow-hidden transition-colors duration-300">
       <StationHeader stationId={activeStation} />
-      <main className="flex-1 no-scrollbar overflow-y-auto scroll-smooth">
+      <main className="max-w-max flex-1 no-scrollbar overflow-y-auto scroll-smooth">
         <Landing />
         <Sitemap />
-        <About />
-        <UW />        
-        <Toolbox />
-        <Portfolio />
-        <Blog />
-        <Contact />
+        <div className="w-full flex flex-col items-center justify-center gap-90">
+          <About />
+          <UW />        
+          <Toolbox />
+          <Portfolio />
+          <Blog />
+          <Contact />
+        </div>
       </main>
       <BottomSheet open={isBottomSheetOpen} onClose={() => setIsBottomSheetOpen(false)} />
       <MapFab visible={!isBottomSheetOpen && activeStation !== null && activeStation !== 'landing'} onClick={() => setIsBottomSheetOpen(true)} />

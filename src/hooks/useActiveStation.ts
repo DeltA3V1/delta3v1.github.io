@@ -14,7 +14,7 @@ export function useActiveStation(sectionIds: readonly StationId[]): StationId | 
         })
       },
       {
-        rootMargin: '-30% 0px -69% 0px',
+        rootMargin: '-40% 0px -59% 0px',
         threshold: 0,
       }
     )

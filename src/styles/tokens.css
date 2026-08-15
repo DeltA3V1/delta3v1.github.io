@@ -5,6 +5,10 @@
     --supporting: #5f6672;
     --surface: #fbf9f7;
     --accent: #00aba9;
+    --red: #e3002c;
+    --green: #008659;
+    --orange: #f8b61c;
+    --blue: #0070bd;
 }
 
 [data-theme='dark'] {
@@ -14,4 +18,8 @@
     --supporting: #a7afbb;
     --surface: #181c21;
     --accent: #2bc7c4;
+    --red: #e3002c;
+    --green: #008659;
+    --orange: #f8b61c;
+    --blue: #0070bd;
 }

@@ -8,6 +8,10 @@
     --color-supporting: var(--supporting);
     --color-surface: var(--surface);
     --color-accent: var(--accent);
+    --color-red: var(--red);
+    --color-green: var(--green);
+    --color-orange: var(--orange);
+    --color-blue: var(--blue);
     --font-sans: "DM Sans", sans-serif;
     --font-inter: "Inter", sans-serif;
 }

@@ -1,21 +1,17 @@
-import Chip from "../ui/Chip";
+import { Chip, ChipGroup } from "../ui/Chip";
 
 function ToolboxGroup({ header, chips }: { header: string; chips: { text: string; proficiency?: 'beginner' | 'intermediate' | 'advanced'; }[] }) {
   return (
     <div className="flex flex-col items-center gap-6">
       <h2 className="text-4xl font-inter py-2 font-medium">{header}</h2>
-      <div className="flex w-full max-w-96 gap-4 flex-wrap justify-center px-10">
-        {chips.map((chip, index) => (
-          <Chip key={index} text={chip.text} proficiency={chip.proficiency} />
-        ))}
-      </div>
+      <ChipGroup chips={chips} />
       <svg
-        className="w-30 h-1 text-secondary"
+        className="w-40 h-1 text-secondary"
         fill="none"
         stroke="currentColor"
-        viewBox="0 0 120 2"
+        viewBox="0 0 160 2"
       >
-        <path d="M0 2H120" stroke-width="2"/>
+        <path d="M0 2H160" stroke-width="2"/>
       </svg>
     </div>
   );
@@ -23,7 +19,7 @@ function ToolboxGroup({ header, chips }: { header: string; chips: { text: string
 
 export function Toolbox() {
   return (
-    <section id="toolbox" className="h-screen flex flex-col items-center justify-between bg-dominant transition-colors duration-300 gap-32">
+    <section id="toolbox" className="flex flex-col items-center justify-between bg-dominant transition-colors duration-300 gap-32">
       <ToolboxGroup
         header="[languages]"
         chips={[
@@ -31,8 +27,9 @@ export function Toolbox() {
           { text: "CSS", proficiency: "intermediate" },
           { text: "Java", proficiency: "advanced" },
           { text: "Python", proficiency: "advanced" },
-          { text: "JS", proficiency: "intermediate" },
+          { text: "JavaScript", proficiency: "intermediate" },
           { text: "TypeScript", proficiency: "intermediate" },
+          { text: "Lua", proficiency: "intermediate" },
         ]}
       />
       <ToolboxGroup
@@ -40,6 +37,7 @@ export function Toolbox() {
         chips={[
           { text: "GitHub", proficiency: "intermediate" },
           { text: "VSCode", proficiency: "intermediate" },
+          { text: "Cursor", proficiency: "intermediate" },
           { text: "Figma", proficiency: "intermediate" },
         ]}
       />
@@ -54,10 +52,10 @@ export function Toolbox() {
       <ToolboxGroup
         header="[exploring]"
         chips={[
-          { text: "Cybersecurity", proficiency: "beginner" },
-          { text: "AI", proficiency: "beginner" },
           { text: "Data Science", proficiency: "beginner" },
           { text: "Blender", proficiency: "beginner" },
+          { text: "Cybersecurity", proficiency: "beginner" },
+          { text: "AI", proficiency: "beginner" },
         ]}
       />
     </section>
