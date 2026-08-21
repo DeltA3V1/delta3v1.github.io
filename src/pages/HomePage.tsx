@@ -24,10 +24,10 @@ function HomePage() {
   return (
     <div className="bg-dominant min-h-screen flex flex-col h-dvh overflow-hidden transition-colors duration-300">
       <StationHeader stationId={activeStation} />
-      <main className="w-full flex-1 no-scrollbar overflow-y-auto scroll-smooth">
+      <main className="w-full flex-1 no-scrollbar overflow-y-auto scroll-smooth scroll-pt-28">
         <Landing />
         <Sitemap />
-        <div className="w-full flex flex-col items-center justify-center gap-90">
+        <div className="w-full flex flex-col items-center justify-center gap-90 pt-28">
           <About />
           <UW />        
           <Toolbox />

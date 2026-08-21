@@ -24,7 +24,7 @@ export const stations = [
     {
         id: 'sitemap',
         label: 'Sitemap',
-        showStationHeader: false,
+        showStationHeader: true,
     },
     {
         id: 'about',
@@ -65,13 +65,19 @@ export const stationIds = stations.map((station) => station.id) as readonly Stat
 export function getStation(id: StationId) {
     return stations.find((station) => station.id === id)
 }
+
+export function getStationIndex(id: StationId) {
+    return stations.findIndex((station) => station.id === id)
+}
+
 export function getPrevStation(id: StationId) {
-    const index = stations.findIndex((station) => station.id === id)
-    if (index === -1) return undefined
+    const index = getStationIndex(id)
+    if (index <= 0) return undefined
     return stations[index - 1]
 }
+
 export function getNextStation(id: StationId) {
-    const index = stations.findIndex((station) => station.id === id)
-    if (index === -1) return undefined
+    const index = getStationIndex(id)
+    if (index === -1 || index >= stations.length - 1) return undefined
     return stations[index + 1]
 }
