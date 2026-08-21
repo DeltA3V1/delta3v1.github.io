@@ -8,7 +8,7 @@ export function Landing() {
   return (
     <section 
       id="landing" 
-      className="min-h-[100dvh] mb-32 font-inter flex flex-col bg-dominant transition-colors duration-300"
+      className="min-h-[100dvh] mb-64 font-inter flex flex-col bg-dominant transition-colors duration-300"
     >
       <div className="flex-1 flex flex-col items-center justify-evenly gap-8 px-4 mt-[5dvh]">
         <h1 className="text-6xl">[hello]</h1>
