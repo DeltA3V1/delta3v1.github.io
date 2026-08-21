@@ -29,7 +29,7 @@ export function Chip({ text, proficiency, size = 'default' }: ChipProps) {
   const border = proficiency === 'beginner' ? 'border-2 border-secondary' : proficiency === 'intermediate' ? '' : proficiency === 'advanced' ? '' : 'border-2 border-supporting';
 
   return (
-    <div className={`${bgColor} w-fit max-w-max flex flex-grow ${sizes[size].chip} items-center justify-center rounded ${border}`}>
+    <div className={`${bgColor} w-fit max-w-max flex ${sizes[size].chip} items-center justify-center rounded ${border}`}>
       <p className={`text-lg ${textColor}`}>{text}</p>
     </div>
   );
