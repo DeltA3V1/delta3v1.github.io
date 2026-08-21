@@ -10,7 +10,7 @@ export function PortfolioCard({ header, date, text, chips, link } : { header: st
         <span className="text-xl text-supporting">{date}</span>
       </div>
       <span className="whitespace-pre-line text-lg text-supporting">{text}</span>
-      <ChipGroup chips={chips} px={4} py={1.5} gap={2} />
+      <ChipGroup chips={chips} size="compact" />
       <div className="flex justify-end text-green">
         <span className="text-xl text-right style-ligatures">{"Projects ->"}</span>
       </div>
