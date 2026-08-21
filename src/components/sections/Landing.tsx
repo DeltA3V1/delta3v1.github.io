@@ -8,10 +8,10 @@ export function Landing() {
   return (
     <section 
       id="landing" 
-      className="min-h-[100dvh] font-inter flex flex-col bg-dominant transition-colors duration-300"
+      className="min-h-[100dvh] mb-32 font-inter flex flex-col bg-dominant transition-colors duration-300"
     >
-      <div className="flex-1 flex flex-col items-center justify-center gap-[5dvh] px-4 mt-[5dvh]">
-        <h1 className="text-8xl">[hello]</h1>
+      <div className="flex-1 flex flex-col items-center justify-evenly gap-8 px-4 mt-[5dvh]">
+        <h1 className="text-6xl">[hello]</h1>
         
         <div className="flex flex-col items-center justify-center gap-4">
           <h2 className="text-4xl md:text-5xl">I'm Dylan,</h2>
@@ -20,22 +20,20 @@ export function Landing() {
           </p>
         </div>
         
-        <div className="w-full max-w-xs flex flex-col items-center justify-center gap-4 my-4">
+        <div className="w-full max-w-xs flex flex-col items-center justify-center gap-4">
           <LandingButton bg="bg-accent" text="Portfolio" textColor="text-surface" onClick={() => scrollToStation("portfolio")} />
           <LandingButton bg="bg-surface" text="Contact Me" textColor="text-accent" onClick={() => scrollToStation("contact")} />
         </div>
       </div>
 
       <button 
-      className="flex flex-col items-center justify-center bg-secondary w-full h-[10vh] py-6" 
+      className="flex flex-col items-center justify-end w-full h-[8vh] py-6" 
       onClick={() => { scrollToStation("sitemap") }}
       >
-        <div className="flex flex-col items-center justify-center">
-          <img 
-            src={ wideArrow } 
-            className={ `${ resolvedTheme === 'light' ? '' : 'invert' }` }
-          />
-        </div>
+        <img 
+          src={ wideArrow } 
+          className={ `${ resolvedTheme === 'light' ? 'invert' : '' }` }
+        />
       </button>
     </section>
   )

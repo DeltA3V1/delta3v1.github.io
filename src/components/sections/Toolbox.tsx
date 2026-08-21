@@ -19,7 +19,7 @@ function ToolboxGroup({ header, chips }: { header: string; chips: { text: string
 
 export function Toolbox() {
   return (
-    <section id="toolbox" className="flex flex-col items-center justify-between bg-dominant transition-colors duration-300 gap-32">
+    <section id="toolbox" className="flex flex-col items-center justify-between bg-dominant transition-colors duration-300 gap-16">
       <ToolboxGroup
         header="[languages]"
         chips={[
