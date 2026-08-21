@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { motion, AnimatePresence, type Variants } from 'motion/react'
 import {
   type Station,
@@ -74,8 +74,23 @@ const instantTransition = { duration: 0 }
 
 function StationHeader({ stationId }: { stationId: StationId | null }) {
   const reduceMotion = usePrefersReducedMotion()
-  const previousStationId = useRef<StationId | null>(null)
-  const [direction, setDirection] = useState(1)
+  // Direction must be known on the *same* render as the new stationId.
+  // useEffect runs too late — AnimatePresence would already have started
+  // enter/exit with the previous direction (one-transition lag on reverse).
+  const previousStationId = useRef<StationId | null>(stationId)
+  const directionRef = useRef(1)
+
+  if (stationId !== previousStationId.current) {
+    if (stationId != null && previousStationId.current != null) {
+      const delta = getStationIndex(stationId) - getStationIndex(previousStationId.current)
+      if (delta !== 0) {
+        directionRef.current = delta > 0 ? 1 : -1
+      }
+    }
+    previousStationId.current = stationId
+  }
+
+  const direction = directionRef.current
 
   const station = stationId ? (getStation(stationId) as Station | undefined) : undefined
   const shouldShow = Boolean(station?.showStationHeader)
@@ -83,24 +98,6 @@ function StationHeader({ stationId }: { stationId: StationId | null }) {
 
   const prevStation = stationId && !isOverview ? getPrevStation(stationId) : undefined
   const nextStation = stationId && !isOverview ? getNextStation(stationId) : undefined
-
-  // Derive animation direction from station order whenever the active id changes.
-  useEffect(() => {
-    if (!stationId) {
-      previousStationId.current = null
-      return
-    }
-
-    const previousId = previousStationId.current
-    if (previousId && previousId !== stationId) {
-      const delta = getStationIndex(stationId) - getStationIndex(previousId)
-      if (delta !== 0) {
-        setDirection(delta > 0 ? 1 : -1)
-      }
-    }
-
-    previousStationId.current = stationId
-  }, [stationId])
 
   const transition = reduceMotion ? instantTransition : slotTransition
 
